@@ -19,21 +19,27 @@ function startGame() {
 	var weight1 = 0, weight2 = 0, weight3 = 0, index = 0, capitalIndex;
 	selList = []; bombPlaceIndex = 25;
 	while (selList.length < 25) {
-		capitalIndex = Math.floor((Math.random() * 222) + 1);
-		switch (grpLayer.graphics[capitalIndex].attributes["WEIGHT"]) {
-			case 1: if (weight1 < 11) {
-						selList[index] = grpLayer.graphics[capitalIndex]; index++; weight1++;
-			        } break;
-			case 2: if (weight2 < 11) {
-						selList[index] = grpLayer.graphics[capitalIndex]; index++; weight2++;
-				     } break;
-			case 3: if (weight3 < 3) {
-						selList[index] = grpLayer.graphics[capitalIndex]; index++; weight3++;
-					} break;
-		}
+		capitalIndex = getRandomInt(0, grpLayer.graphics.length - 1)
+			console.log(grpLayer.graphics[capitalIndex])
+			switch (grpLayer.graphics[capitalIndex].attributes["WEIGHT"]) {
+				case 1: if (weight1 < 11) {
+							selList[index] = grpLayer.graphics[capitalIndex]; index++; weight1++;
+				        } break;
+				case 2: if (weight2 < 11) {
+							selList[index] = grpLayer.graphics[capitalIndex]; index++; weight2++;
+					     } break;
+				case 3: if (weight3 < 3) {
+							selList[index] = grpLayer.graphics[capitalIndex]; index++; weight3++;
+						} break;
+			}
 	}
 	nextTarget();
 }
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 function nextTarget() {
 	$('#remainingBombs').text(parseInt($('#remainingBombs').text()) - 1);
 	bombPlaceIndex--;
